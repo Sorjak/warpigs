@@ -8,7 +8,7 @@ import Web3 from 'web3';
 //          MdIcon, MdDrawer, MdList, MdField, MdInput } from 'vue-material/dist/components';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
-// import 'vue-material/dist/theme/black-green-dark.css'; // This line here
+import 'vue-material/dist/theme/black-green-dark.css'; // This line here
 
 Vue.config.productionTip = false;
 
@@ -41,14 +41,6 @@ Vue.use(VueMaterial);
 //   warn: colorPrimary,
 //   background: 'white'
 // })
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
-
-@include md-register-theme("default", (
-  primary: md-get-palette-color(blue, A200), // The primary color of your application
-  accent: md-get-palette-color(red, A200) // The accent or secondary color
-));
-
-@import "~vue-material/dist/theme/all"; // Apply the theme
 
 new Vue({
   router,
