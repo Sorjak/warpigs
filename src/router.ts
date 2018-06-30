@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Web3 from 'web3';
+
+import store from './store';
 import Home from './views/Home.vue';
-import About from './views/About.vue';
+import NoMetaMask from './views/NoMetaMask.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/',
@@ -13,9 +16,26 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About,
+      path: '/nometamask',
+      name: 'nometamask',
+      component: NoMetaMask,
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  let web3: any = null;
+  if (typeof (window as any).web3 !== 'undefined') {
+      web3 = new Web3((window as any).web3.currentProvider);
+  }
+
+  if (web3) {
+    return store.dispatch('initWeb3', web3).then(() => {
+      next();
+    });
+  }
+
+  next('nometamask');
+});
+
+export default router;
